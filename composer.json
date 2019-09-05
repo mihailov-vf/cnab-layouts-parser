@@ -1,19 +1,23 @@
 {
-	"name": "glauberportella/cnab-layouts-parser",
-    "description": "Parser de arquivos de configuração CNAB gerados no projeto https://github.com/glauberportella/cnab-layouts",
+	"name": "jrodella/cnab-layouts-parser",
+    "description": "Isso é uma fork de: glauberportella/cnab-layouts-parser",
     "type": "project",
     "license": "MIT",
+    "version": "1.0.0",
+    "minimum-stability": "stable",
     "authors": [
         {
-            "name": "Glauber Portella",
-            "email": "glauberportella@gmail.com"
+            "name": "Jonathan R Delgado",
+            "email": "jon.delgado@outlook.com"
         }
     ],
     "require": {
-		"symfony/yaml": "2.7.*"
+		"symfony/yaml": "4.*"
 	},
     "autoload": {
-        "psr-4": { "": "src/" }
+        "psr-4": {
+            "": "src/"
+        }
     },
     "require-dev": {
         "codeclimate/php-test-reporter": "^0.3.2"

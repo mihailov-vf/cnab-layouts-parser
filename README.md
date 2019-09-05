@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/glauberportella/cnab-layouts-parser.svg?branch=master)](https://travis-ci.org/glauberportella/cnab-layouts-parser) [![Code Climate](https://codeclimate.com/github/glauberportella/cnab-layouts-parser/badges/gpa.svg)](https://codeclimate.com/github/glauberportella/cnab-layouts-parser)
+Isso é uma fork de: https://github.com/glauberportella/cnab-layouts-parser
 
 # CNAB LAYOUTS PARSER
 
@@ -6,7 +6,7 @@
 
 Instale via composer:
 
-`composer install glauberportella/cnab-layouts-parser`
+`composer require jrodella/cnab-layouts-parser`
 
 # Exemplos
 
@@ -15,14 +15,14 @@ Instale via composer:
 Gerando um arquivo Remessa CNAB240:
 
 ```php
-<?php 
+<?php
 require_once __DIR__.'/vendor/autoload.php';
 
 use CnabParser\Parser\Layout;
 use CnabParser\Model\Remessa;
 use CnabParser\Output\RemessaFile;
 
-$remessaLayout = new Layout(__DIR__.'/config/itau/cnab240/cobranca.yml');
+$remessaLayout = new Layout('itau','cnab240','cobranca');
 $remessa = new Remessa($remessaLayout);
 
 // header arquivo
@@ -151,7 +151,7 @@ use CnabParser\Parser\Layout;
 use CnabParser\Model\Retorno;
 use CnabParser\Input\RetornoFile;
 
-$layout = new Layout(__DIR__.'/config/itau/cnab240/cobranca.yml');
+$layout = new Layout('itau','cnab240','cobranca');
 $retornoFile = new RetornoFile($layout, __DIR__.'/data/cobranca-itau-cnab240.ret');
 
 // Gera o objeto instancia de CnabParser\Model\Retorno com os dados do arquivo de retorno processado
@@ -159,26 +159,3 @@ $retorno = $retornoFile->generate();
 
 // ... utilize o $retorno em seu sistema para verificações, etc. ...
 ```
-
-# Licença
-
-The MIT License (MIT)
-
-Copyright (c) 2016 Glauber Portella <glauberportella@gmail.com>
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the "Software"), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
-the Software, and to permit persons to whom the Software is furnished to do so,
-subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
-FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
-COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
-IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
-CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

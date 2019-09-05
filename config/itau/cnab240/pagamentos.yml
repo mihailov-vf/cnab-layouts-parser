@@ -6,7 +6,7 @@
 #
 # ALINHAMENTO DE CAMPOS
 # - Campos Numéricos (9) = Sempre à direita e preenchidos com zeros à esquerda.
-# - Campos Alfanuméricos (X) = Sempre à esquerda e preenchidos com brancos à direita. 
+# - Campos Alfanuméricos (X) = Sempre à esquerda e preenchidos com brancos à direita.
 # Pagamento através de Cheque, OP, DOC, TED, ou crédito em conta corrente:
 #
 # - Segmento A - (Obrigatório)
@@ -222,11 +222,11 @@ remessa:
       picture: '9(6)'
     total_valor_pagtos:
       pos: [24,41]
-      picture: '9(16)V0(2)'
+      picture: '9(16)V9(2)'
     zeros_01:
       pos: [42,59]
       picture: '9(18)'
-      default: 0
+      default: '0'
     brancos_02:
       pos: [60,230]
       picture: 'X(171)'
@@ -895,7 +895,7 @@ retorno:
       picture: '9(6)'
     total_valor_pagtos:
       pos: [24,41]
-      picture: '9(16)V0(2)'
+      picture: '9(16)V9(2)'
     zeros_01:
       pos: [42,59]
       picture: '9(18)'
