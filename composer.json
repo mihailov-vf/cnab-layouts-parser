@@ -3,8 +3,9 @@
     "description": "Isso é uma fork de: glauberportella/cnab-layouts-parser",
     "type": "project",
     "license": "MIT",
-    "version": "1.0.0",
-    "minimum-stability": "stable",
+    "version": "1.0.1",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "authors": [
         {
             "name": "Jonathan R Delgado",

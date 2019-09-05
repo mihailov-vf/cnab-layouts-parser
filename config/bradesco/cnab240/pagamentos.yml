@@ -1,0 +1,1080 @@
+# FORMATO: BANCO BRADESCO - CNAB240
+# OBJETIVO DO ARQUIVO: Pagamento Através de Crédito em Conta, Cheque, OP, DOC, TED ou Pagamento com Autenticação - BRADESCOEMPRESANET
+#
+# TAMANHO DO REGISTRO
+# O Tamanho do Registro é de 240 bytes.
+#
+# ALINHAMENTO DE CAMPOS
+# - Campos Numéricos (9) = Sempre à direita e preenchidos com zeros à esquerda.
+# - Campos Alfanuméricos (X) = Sempre à esquerda e preenchidos com brancos à direita.
+# Pagamento através de Cheque, OP, DOC, TED, ou crédito em conta corrente:
+#
+# - Segmento A - (Obrigatório)
+# - Segmento B - (Obrigatório)
+# - Segmento C – (Opcional. Necessário quando contratado o serviço de Demonstrativo de Pagamentos via web / e-mail)
+# - Segmento Z – (Opcional – Informado somente no arquivo retorno, quando contratado junto ao Banco a opção de Autenticação Eletrônica de Pagamentos por arquivo)
+#
+
+servico: pagamento_doc_ted
+
+versao: 'bradesco_04_abr2019'
+
+layout: 'cnab240'
+
+remessa:
+
+  header_arquivo:
+    codigo_banco:
+      pos: [1,3]
+      picture: '9(3)'
+      default: 237
+    codigo_lote:
+      pos: [4,7]
+      picture: '9(4)'
+      default: '0000'
+    tipo_registro:
+      pos: [8,8]
+      picture: '9(1)'
+      default: '0'
+    brancos_01:
+      pos: [9,17]
+      picture: 'X(9)'
+      default: ''
+    tipo_inscricao:
+      pos: [18,18]
+      picture: '9(1)'
+    inscricao_numero:
+      pos: [19,32]
+      picture: '9(14)'
+    convenio:
+      pos: [33,52]
+      picture: 'X(20)'
+      default: ''
+    agencia_debito:
+      pos: [53,57]
+      picture: '9(5)'
+    agencia_debito_dv:
+      pos: [58,58]
+      picture: 'X(1)'
+      default: ''
+    conta_debito:
+      pos: [59,70]
+      picture: '9(12)'
+    conta_debito_dv:
+      pos: [71,71]
+      picture: 'X(1)'
+      default: ''
+    dac_debito:
+      pos: [72,72]
+      picture: 'X(1)'
+      default: ''
+    nome_empresa:
+      pos: [73,102]
+      picture: 'X(30)'
+    nome_banco:
+      pos: [103,132]
+      picture: 'X(30)'
+    brancos_02:
+      pos: [133,142]
+      picture: 'X(10)'
+      default: ''
+    arquivo_codigo:
+      pos: [143,143]
+      picture: '9(1)'
+      default: 1
+    data_geracao:
+      pos: [144,151]
+      picture: '9(8)'
+    hora_geracao:
+      pos: [152,157]
+      picture: '9(6)'
+    sequencia:
+      pos: [158,163]
+      picture: '9(6)'
+      default: 0
+    layout_arquivo:
+      pos: [164,166]
+      picture: '9(3)'
+      default: '089'
+    densidade_gravacao:
+      pos: [167,171]
+      picture: '9(5)'
+      default: 0
+    brancos_03:
+      pos: [172,240]
+      picture: 'X(69)'
+      default: ''
+
+  header_lote:
+    codigo_banco:
+      pos: [1,3]
+      picture: '9(3)'
+      default: 237
+    codigo_lote:
+      pos: [4,7]
+      picture: '9(4)'
+      default: '0000'
+    tipo_registro:
+      pos: [8,8]
+      picture: '9(1)'
+      default: '1'
+    operacao:
+      pos: [9,9]
+      picture: 'X(1)'
+      default: 'C'
+    servico:
+      pos: [10,11]
+      picture: '9(2)'
+      default: ''
+    forma_lancamento:
+      pos: [12,13]
+      picture: '9(2)'
+      default: '03'
+    layout_lote:
+      pos: [14,16]
+      picture: '9(3)'
+      default: '045'
+    brancos_01:
+      pos: [17,17]
+      picture: 'X(1)'
+      default: ''
+    tipo_inscricao:
+      pos: [18,18]
+      picture: '9(1)'
+    inscricao_numero:
+      pos: [19,32]
+      picture: '9(14)'
+    convenio:
+      pos: [33,52]
+      picture: 'X(20)'
+      default: ''
+    agencia_debito:
+      pos: [53,57]
+      picture: '9(5)'
+    agencia_debito_dv:
+      pos: [58,58]
+      picture: 'X(1)'
+      default: ''
+    conta_debito:
+      pos: [59,70]
+      picture: '9(12)'
+    conta_debito_dv:
+      pos: [71,71]
+      picture: 'X(1)'
+      default: ''
+    dac_debito:
+      pos: [72,72]
+      picture: 'X(1)'
+      default: ''
+    nome_empresa:
+      pos: [73,102]
+      picture: 'X(30)'
+    mensagem:
+      pos: [103,142]
+      picture: 'X(40)'
+    logradouro:
+      pos: [143,172]
+      picture: 'X(30)'
+      default: ''
+    numero:
+      pos: [173,177]
+      picture: '9(5)'
+    complemento:
+      pos: [178,192]
+      picture: 'X(15)'
+      default: ''
+    cidade:
+      pos: [193,212]
+      picture: 'X(20)'
+    cep:
+      pos: [213,217]
+      picture: '9(5)'
+    complemento_cep:
+      pos: [218,220]
+      picture: 'X(3)'
+    estado:
+      pos: [221,222]
+      picture: 'X(2)'
+    indicativo:
+      pos: [223,224]
+      picture: '9(2)'
+      default: '01'
+    brancos_02:
+      pos: [225,230]
+      picture: 'X(6)'
+      default: ''
+    codigos_ocorrencias:
+      pos: [231,240]
+      picture: 'X(10)'
+
+  trailer_lote:
+    codigo_banco:
+      pos: [1,3]
+      picture: '9(3)'
+      default: 237
+    codigo_lote:
+      pos: [4,7]
+      picture: '9(4)'
+    tipo_registro:
+      pos: [8,8]
+      picture: '9(1)'
+      default: 5
+    brancos_01:
+      pos: [9,17]
+      picture: 'X(9)'
+      default: ''
+    total_registros_lote:
+      pos: [18,23]
+      picture: '9(6)'
+    total_valor_pagtos:
+      pos: [24,41]
+      picture: '9(16)V9(2)'
+    total_moedas:
+      pos: [42,59]
+      picture: '9(13)V9(5)'
+      default: 0
+    numero_aviso_debito:
+      pos: [60,65]
+      picture: '9(6)'
+      default: 0
+    brancos_02:
+      pos: [66,230]
+      picture: 'X(165)'
+      default: ''
+    codigos_ocorrencias:
+      pos: [231,240]
+      picture: 'X(10)'
+
+  trailer_arquivo:
+    codigo_banco:
+      pos: [1,3]
+      picture: '9(3)'
+      default: 237
+    codigo_lote:
+      pos: [4,7]
+      picture: '9(4)'
+      default: 9999
+    tipo_registro:
+      pos: [8,8]
+      picture: '9(1)'
+      default: 9
+    brancos_01:
+      pos: [9,17]
+      picture: 'X(9)'
+      default: ''
+    total_lotes_arquivo:
+      pos: [18,23]
+      picture: '9(6)'
+    total_registros:
+      pos: [24,29]
+      picture: '9(6)'
+    total_contas:
+      pos: [30,35]
+      picture: '9(6)'
+    brancos_02:
+      pos: [36,240]
+      picture: 'X(205)'
+      default: ''
+
+  detalhes:
+    # segmentos
+    # - Segmento A - (Obrigatório)
+    # - Segmento B - (Obrigatório)
+    # - Segmento C – (Opcional. Necessário quando contratado o serviço de Demonstrativo de Pagamentos via web / e-mail)
+    # - Segmento Z – (Opcional – Informado somente no arquivo retorno, quando contratado junto ao Banco a opção de Autenticação Eletrônica de Pagamentos por arquivo)
+    #
+    segmento_a:
+      codigo_banco:
+        pos: [1,3]
+        picture: '9(3)'
+        default: 237
+      codigo_lote:
+        pos: [4,7]
+        picture: '9(4)'
+      tipo_registro:
+        pos: [8,8]
+        picture: '9(1)'
+        default: 3
+      numero_registro:
+        pos: [9,13]
+        picture: '9(5)'
+      segmento_codigo:
+        pos: [14,14]
+        picture: 'X(1)'
+        default: 'A'
+      tipo_movimento:
+        pos: [15,15]
+        picture: '9(1)'
+      codigo_movimento:
+        pos: [16,17]
+        picture: '9(2)'
+      codigo_camara_centralizadora:
+        pos: [18,20]
+        picture: '9(3)'
+      codigo_banco_favorecido:
+        pos: [21,23]
+        picture: '9(3)'
+      agencia_favorecido:
+        pos: [24,28]
+        picture: '9(5)'
+      agencia_favorecido_dv:
+        pos: [29,29]
+        picture: 'X(1)'
+      conta_favorecido:
+        pos: [30,41]
+        picture: '9(12)'
+      conta_favorecido_dv:
+        pos: [42,42]
+        picture: 'X(1)'
+      dac_favorecido:
+        pos: [43,43]
+        picture: 'X(1)'
+        default: ''
+      nome_favorecido:
+        pos: [44,73]
+        picture: 'X(30)'
+      numero_doc:
+        pos: [74,93]
+        picture: 'X(20)'
+      data_pagto:
+        pos: [94,101]
+        picture: 'X(8)'
+      moeda:
+        pos: [102,104]
+        picture: 'X(3)'
+        default: 'BRL'
+      moeda_quantidade:
+        pos: [105,119]
+        picture: '9(10)V9(5)'
+      valor_pagto:
+        pos: [120,134]
+        picture: '9(13)V9(2)'
+        default: 0
+      nosso_numero:
+        pos: [135,154]
+        picture: 'X(20)'
+      data_efetiva:
+        pos: [155,162]
+        picture: 'X(8)'
+      valor_efetivo:
+        pos: [163,177]
+        picture: '9(13)V9(2)'
+      informacao:
+        pos: [178,217]
+        picture: 'X(40)'
+      finalidade_doc:
+        pos: [218,219]
+        picture: 'X(2)'
+      finalidade_ted:
+        pos: [220,224]
+        picture: 'X(5)'
+      finalidade_complementar:
+        pos: [225,226]
+        picture: 'X(2)'
+        default: ''
+      brancos_01:
+        pos: [227,229]
+        picture: 'X(3)'
+        default: ''
+      aviso:
+        pos: [230,230]
+        picture: 'X(1)'
+        default: '0'
+      codigo_ocorrencias:
+        pos: [231,240]
+        picture: 'X(10)'
+
+    segmento_b:
+      codigo_banco:
+        pos: [1,3]
+        picture: '9(3)'
+        default: 237
+      codigo_lote:
+        pos: [4,7]
+        picture: '9(4)'
+      tipo_registro:
+        pos: [8,8]
+        picture: '9(1)'
+        default: 3
+      numero_registro:
+        pos: [9,13]
+        picture: '9(5)'
+      codigo_segmento:
+        pos: [14,14]
+        picture: 'X(1)'
+        default: 'B'
+      brancos_01:
+        pos: [15,17]
+        picture: 'X(3)'
+        default: ''
+      tipo_inscricao_favorecido:
+        pos: [18,18]
+        picture: '9(1)'
+      inscricao_favorecido:
+        pos: [19,32]
+        picture: '9(14)'
+      logradouro:
+        pos: [33,62]
+        picture: 'X(30)'
+      numero:
+        pos: [63,67]
+        picture: '9(5)'
+      complemento:
+        pos: [68,82]
+        picture: 'X(15)'
+        default: ''
+      bairro:
+        pos: [83,97]
+        picture: 'X(15)'
+      cidade:
+        pos: [98,117]
+        picture: 'X(20)'
+      cep:
+        pos: [118,122]
+        picture: '9(5)'
+      complemento_cep:
+        pos: [123,125]
+        picture: '9(3)'
+      estado:
+        pos: [126,127]
+        picture: 'X(2)'
+      brancos_02:
+        pos: [128,210]
+        picture: 'X(83)'
+      doc_favorecido:
+        pos: [211,225]
+        picture: 'X(15)'
+        default: ''
+      aviso:
+        pos: [226,226]
+        picture: 'X(1)'
+        default: '0'
+      codigo_centralizadora:
+        pos: [227,232]
+        picture: '9(6)'
+      codigo_ispb:
+        pos: [233,240]
+        picture: '9(8)'
+
+    segmento_c:
+      codigo_banco:
+        pos: [1,3]
+        picture: '9(3)'
+        default: 237
+      codigo_lote:
+        pos: [4,7]
+        picture: '9(4)'
+      tipo_registro:
+        pos: [8,8]
+        picture: '9(1)'
+        default: 3
+      numero_registro:
+        pos: [9,13]
+        picture: '9(5)'
+      codigo_segmento:
+        pos: [14,14]
+        picture: 'X(1)'
+        default: 'C'
+      brancos_01:
+        pos: [15,17]
+        picture: 'X(3)'
+        default: ''
+      valor_ir:
+        pos: [18,32]
+        picture: '9(13)V9(2)'
+      valor_iss:
+        pos: [33,47]
+        picture: '9(13)V9(2)'
+      valor_iof:
+        pos: [48,62]
+        picture: '9(13)V9(2)'
+      outras_deducoes:
+        pos: [63,77]
+        picture: '9(13)V9(2)'
+      outros_acrescimos:
+        pos: [78,92]
+        picture: '9(13)V9(2)'
+      agencia_substituta:
+        pos: [93,97]
+        picture: '9(5)'
+      agencia_substituta_dv:
+        pos: [98,98]
+        picture: 'X(1)'
+      conta_substituta:
+        pos: [99,110]
+        picture: '9(12)'
+      conta_substituta_dv:
+        pos: [111,111]
+        picture: 'X(1)'
+      dac_substituta:
+        pos: [112,112]
+        picture: 'X(1)'
+        default: ''
+      valor_inss:
+        pos: [113,127]
+        picture: '9(13)V9(2)'
+      brancos_02:
+        pos: [128,240]
+        picture: 'X(113)'
+        default: ''
+
+    segmento_z:
+      codigo_banco:
+        pos: [1,3]
+        picture: '9(3)'
+        default: 237
+      codigo_lote:
+        pos: [4,7]
+        picture: '9(4)'
+      tipo_registro:
+        pos: [8,8]
+        picture: '9(1)'
+        default: 3
+      numero_registro:
+        pos: [9,13]
+        picture: '9(5)'
+      codigo_segmento:
+        pos: [14,14]
+        picture: 'X(1)'
+        default: 'Z'
+      autenticacao:
+        pos: [15,78]
+        picture: 'X(64)'
+      autenticacao_bancaria:
+        pos: [79,103]
+        picture: 'X(25)'
+      brancos_01:
+        pos: [104,230]
+        picture: 'X(127)'
+        default: ''
+      codigo_ocorrencias:
+        pos: [231,240]
+        picture: 'X(10)'
+
+retorno:
+  header_arquivo:
+    codigo_banco:
+      pos: [1,3]
+      picture: '9(3)'
+      default: 237
+    codigo_lote:
+      pos: [4,7]
+      picture: '9(4)'
+      default: '0000'
+    tipo_registro:
+      pos: [8,8]
+      picture: '9(1)'
+      default: '0'
+    brancos_01:
+      pos: [9,17]
+      picture: 'X(9)'
+      default: ''
+    tipo_inscricao:
+      pos: [18,18]
+      picture: '9(1)'
+    inscricao_numero:
+      pos: [19,32]
+      picture: '9(14)'
+    convenio:
+      pos: [33,52]
+      picture: 'X(20)'
+      default: ''
+    agencia_debito:
+      pos: [53,57]
+      picture: '9(5)'
+    agencia_debito_dv:
+      pos: [58,58]
+      picture: 'X(1)'
+      default: ''
+    conta_debito:
+      pos: [59,70]
+      picture: '9(12)'
+    conta_debito_dv:
+      pos: [71,71]
+      picture: 'X(1)'
+      default: ''
+    dac_debito:
+      pos: [72,72]
+      picture: 'X(1)'
+      default: ''
+    nome_empresa:
+      pos: [73,102]
+      picture: 'X(30)'
+    nome_banco:
+      pos: [103,132]
+      picture: 'X(30)'
+    brancos_02:
+      pos: [133,142]
+      picture: 'X(10)'
+      default: ''
+    arquivo_codigo:
+      pos: [143,143]
+      picture: '9(1)'
+      default: 1
+    data_geracao:
+      pos: [144,151]
+      picture: '9(8)'
+    hora_geracao:
+      pos: [152,157]
+      picture: '9(6)'
+    sequencia:
+      pos: [158,163]
+      picture: '9(6)'
+      default: 0
+    layout_arquivo:
+      pos: [164,166]
+      picture: '9(3)'
+      default: '089'
+    densidade_gravacao:
+      pos: [167,171]
+      picture: '9(5)'
+      default: 0
+    brancos_03:
+      pos: [172,240]
+      picture: 'X(69)'
+      default: ''
+
+  header_lote:
+    codigo_banco:
+      pos: [1,3]
+      picture: '9(3)'
+      default: 237
+    codigo_lote:
+      pos: [4,7]
+      picture: '9(4)'
+      default: '0000'
+    tipo_registro:
+      pos: [8,8]
+      picture: '9(1)'
+      default: '1'
+    operacao:
+      pos: [9,9]
+      picture: 'X(1)'
+      default: 'C'
+    servico:
+      pos: [10,11]
+      picture: '9(2)'
+      default: ''
+    forma_lancamento:
+      pos: [12,13]
+      picture: '9(2)'
+      default: '03'
+    layout_lote:
+      pos: [14,16]
+      picture: '9(3)'
+      default: '045'
+    brancos_01:
+      pos: [17,17]
+      picture: 'X(1)'
+      default: ''
+    tipo_inscricao:
+      pos: [18,18]
+      picture: '9(1)'
+    inscricao_numero:
+      pos: [19,32]
+      picture: '9(14)'
+    convenio:
+      pos: [33,52]
+      picture: 'X(20)'
+      default: ''
+    agencia_debito:
+      pos: [53,57]
+      picture: '9(5)'
+    agencia_debito_dv:
+      pos: [58,58]
+      picture: 'X(1)'
+      default: ''
+    conta_debito:
+      pos: [59,70]
+      picture: '9(12)'
+    conta_debito_dv:
+      pos: [71,71]
+      picture: 'X(1)'
+      default: ''
+    dac_debito:
+      pos: [72,72]
+      picture: 'X(1)'
+      default: ''
+    nome_empresa:
+      pos: [73,102]
+      picture: 'X(30)'
+    mensagem:
+      pos: [103,142]
+      picture: 'X(40)'
+    logradouro:
+      pos: [143,172]
+      picture: 'X(30)'
+      default: ''
+    numero:
+      pos: [173,177]
+      picture: '9(5)'
+    complemento:
+      pos: [178,192]
+      picture: 'X(15)'
+      default: ''
+    cidade:
+      pos: [193,212]
+      picture: 'X(20)'
+    cep:
+      pos: [213,217]
+      picture: '9(5)'
+    complemento_cep:
+      pos: [218,220]
+      picture: 'X(3)'
+    estado:
+      pos: [221,222]
+      picture: 'X(2)'
+    indicativo:
+      pos: [223,224]
+      picture: '9(2)'
+      default: '01'
+    brancos_02:
+      pos: [225,230]
+      picture: 'X(6)'
+      default: ''
+    codigos_ocorrencias:
+      pos: [231,240]
+      picture: 'X(10)'
+
+  trailer_lote:
+    codigo_banco:
+      pos: [1,3]
+      picture: '9(3)'
+      default: 237
+    codigo_lote:
+      pos: [4,7]
+      picture: '9(4)'
+    tipo_registro:
+      pos: [8,8]
+      picture: '9(1)'
+      default: 5
+    brancos_01:
+      pos: [9,17]
+      picture: 'X(9)'
+      default: ''
+    total_registros_lote:
+      pos: [18,23]
+      picture: '9(6)'
+    total_valor_pagtos:
+      pos: [24,41]
+      picture: '9(16)V9(2)'
+    total_moedas:
+      pos: [42,59]
+      picture: '9(13)V9(5)'
+      default: 0
+    numero_aviso_debito:
+      pos: [60,65]
+      picture: '9(6)'
+      default: 0
+    brancos_02:
+      pos: [66,230]
+      picture: 'X(165)'
+      default: ''
+    codigos_ocorrencias:
+      pos: [231,240]
+      picture: 'X(10)'
+
+  trailer_arquivo:
+    codigo_banco:
+      pos: [1,3]
+      picture: '9(3)'
+      default: 237
+    codigo_lote:
+      pos: [4,7]
+      picture: '9(4)'
+      default: 9999
+    tipo_registro:
+      pos: [8,8]
+      picture: '9(1)'
+      default: 9
+    brancos_01:
+      pos: [9,17]
+      picture: 'X(9)'
+      default: ''
+    total_lotes_arquivo:
+      pos: [18,23]
+      picture: '9(6)'
+    total_registros:
+      pos: [24,29]
+      picture: '9(6)'
+    total_contas:
+      pos: [30,35]
+      picture: '9(6)'
+    brancos_02:
+      pos: [36,240]
+      picture: 'X(205)'
+      default: ''
+
+  detalhes:
+    # segmentos
+    # - Segmento A - (Obrigatório)
+    # - Segmento B - (Obrigatório)
+    # - Segmento C – (Opcional. Necessário quando contratado o serviço de Demonstrativo de Pagamentos via web / e-mail)
+    # - Segmento Z – (Opcional – Informado somente no arquivo retorno, quando contratado junto ao Banco a opção de Autenticação Eletrônica de Pagamentos por arquivo)
+    #
+    segmento_a:
+      codigo_banco:
+        pos: [1,3]
+        picture: '9(3)'
+        default: 237
+      codigo_lote:
+        pos: [4,7]
+        picture: '9(4)'
+      tipo_registro:
+        pos: [8,8]
+        picture: '9(1)'
+        default: 3
+      numero_registro:
+        pos: [9,13]
+        picture: '9(5)'
+      segmento_codigo:
+        pos: [14,14]
+        picture: 'X(1)'
+        default: 'A'
+      tipo_movimento:
+        pos: [15,15]
+        picture: '9(1)'
+      codigo_movimento:
+        pos: [16,17]
+        picture: '9(2)'
+      codigo_camara_centralizadora:
+        pos: [18,20]
+        picture: '9(3)'
+      codigo_banco_favorecido:
+        pos: [21,23]
+        picture: '9(3)'
+      agencia_favorecido:
+        pos: [24,28]
+        picture: '9(5)'
+      agencia_favorecido_dv:
+        pos: [29,29]
+        picture: 'X(1)'
+      conta_favorecido:
+        pos: [30,41]
+        picture: '9(12)'
+      conta_favorecido_dv:
+        pos: [42,42]
+        picture: 'X(1)'
+      dac_favorecido:
+        pos: [43,43]
+        picture: 'X(1)'
+        default: ''
+      nome_favorecido:
+        pos: [44,73]
+        picture: 'X(30)'
+      numero_doc:
+        pos: [74,93]
+        picture: 'X(20)'
+      data_pagto:
+        pos: [94,101]
+        picture: 'X(8)'
+      moeda:
+        pos: [102,104]
+        picture: 'X(3)'
+        default: 'BRL'
+      moeda_quantidade:
+        pos: [105,119]
+        picture: '9(10)V9(5)'
+      valor_pagto:
+        pos: [120,134]
+        picture: '9(13)V9(2)'
+      nosso_numero:
+        pos: [135,154]
+        picture: 'X(20)'
+      data_efetiva:
+        pos: [155,162]
+        picture: 'X(8)'
+      valor_efetivo:
+        pos: [163,177]
+        picture: '9(13)V9(2)'
+      informacao:
+        pos: [178,217]
+        picture: 'X(40)'
+      finalidade_doc:
+        pos: [218,219]
+        picture: 'X(2)'
+      finalidade_ted:
+        pos: [220,224]
+        picture: 'X(5)'
+      finalidade_complementar:
+        pos: [225,226]
+        picture: 'X(2)'
+        default: ''
+      brancos_01:
+        pos: [227,229]
+        picture: 'X(3)'
+        default: ''
+      aviso:
+        pos: [230,230]
+        picture: 'X(1)'
+        default: '0'
+      codigo_ocorrencias:
+        pos: [231,240]
+        picture: 'X(10)'
+
+    segmento_b:
+      codigo_banco:
+        pos: [1,3]
+        picture: '9(3)'
+        default: 237
+      codigo_lote:
+        pos: [4,7]
+        picture: '9(4)'
+      tipo_registro:
+        pos: [8,8]
+        picture: '9(1)'
+        default: 3
+      numero_registro:
+        pos: [9,13]
+        picture: '9(5)'
+      codigo_segmento:
+        pos: [14,14]
+        picture: 'X(1)'
+        default: 'B'
+      brancos_01:
+        pos: [15,17]
+        picture: 'X(3)'
+        default: ''
+      tipo_inscricao_favorecido:
+        pos: [18,18]
+        picture: '9(1)'
+      inscricao_favorecido:
+        pos: [19,32]
+        picture: '9(14)'
+      logradouro:
+        pos: [33,62]
+        picture: 'X(30)'
+      numero:
+        pos: [63,67]
+        picture: '9(5)'
+      complemento:
+        pos: [68,82]
+        picture: 'X(15)'
+        default: ''
+      bairro:
+        pos: [83,97]
+        picture: 'X(15)'
+      cidade:
+        pos: [98,117]
+        picture: 'X(20)'
+      cep:
+        pos: [118,122]
+        picture: '9(5)'
+      complemento_cep:
+        pos: [123,125]
+        picture: '9(3)'
+      estado:
+        pos: [126,127]
+        picture: 'X(2)'
+      brancos_02:
+        pos: [128,210]
+        picture: 'X(83)'
+      doc_favorecido:
+        pos: [211,225]
+        picture: 'X(15)'
+        default: ''
+      aviso:
+        pos: [226,226]
+        picture: 'X(1)'
+        default: '0'
+      codigo_centralizadora:
+        pos: [227,232]
+        picture: '9(6)'
+      codigo_ispb:
+        pos: [233,240]
+        picture: '9(8)'
+
+    segmento_c:
+      codigo_banco:
+        pos: [1,3]
+        picture: '9(3)'
+        default: 237
+      codigo_lote:
+        pos: [4,7]
+        picture: '9(4)'
+      tipo_registro:
+        pos: [8,8]
+        picture: '9(1)'
+        default: 3
+      numero_registro:
+        pos: [9,13]
+        picture: '9(5)'
+      codigo_segmento:
+        pos: [14,14]
+        picture: 'X(1)'
+        default: 'C'
+      brancos_01:
+        pos: [15,17]
+        picture: 'X(3)'
+        default: ''
+      valor_ir:
+        pos: [18,32]
+        picture: '9(13)V9(2)'
+      valor_iss:
+        pos: [33,47]
+        picture: '9(13)V9(2)'
+      valor_iof:
+        pos: [48,62]
+        picture: '9(13)V9(2)'
+      outras_deducoes:
+        pos: [63,77]
+        picture: '9(13)V9(2)'
+      outros_acrescimos:
+        pos: [78,92]
+        picture: '9(13)V9(2)'
+      agencia_substituta:
+        pos: [93,97]
+        picture: '9(5)'
+      agencia_substituta_dv:
+        pos: [98,98]
+        picture: 'X(1)'
+      conta_substituta:
+        pos: [99,110]
+        picture: '9(12)'
+      conta_substituta_dv:
+        pos: [111,111]
+        picture: 'X(1)'
+      dac_substituta:
+        pos: [112,112]
+        picture: 'X(1)'
+        default: ''
+      valor_inss:
+        pos: [113,127]
+        picture: '9(13)V9(2)'
+      brancos_02:
+        pos: [128,240]
+        picture: 'X(113)'
+        default: ''
+
+    segmento_z:
+      codigo_banco:
+        pos: [1,3]
+        picture: '9(3)'
+        default: 237
+      codigo_lote:
+        pos: [4,7]
+        picture: '9(4)'
+      tipo_registro:
+        pos: [8,8]
+        picture: '9(1)'
+        default: 3
+      numero_registro:
+        pos: [9,13]
+        picture: '9(5)'
+      codigo_segmento:
+        pos: [14,14]
+        picture: 'X(1)'
+        default: 'Z'
+      autenticacao:
+        pos: [15,78]
+        picture: 'X(64)'
+      autenticacao_bancaria:
+        pos: [79,103]
+        picture: 'X(25)'
+      brancos_01:
+        pos: [104,230]
+        picture: 'X(127)'
+        default: ''
+      codigo_ocorrencias:
+        pos: [231,240]
+        picture: 'X(10)'
