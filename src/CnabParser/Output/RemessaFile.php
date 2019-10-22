@@ -26,106 +26,118 @@ use CnabParser\Model\Lote;
 
 class RemessaFile extends IntercambioBancarioRemessaFileAbstract
 {
-	const CNAB_EOL = "\r\n";
+    const CNAB_EOL = "\r\n";
 
-	public function generate($path)
-	{
-		// header arquivo
-		$headerArquivo = $this->encodeHeaderArquivo();
+    public function generateString()
+    {
+        // header arquivo
+        $headerArquivo = $this->encodeHeaderArquivo();
 
-		// lotes
-		$lotes = $this->encodeLotes();
+        // lotes
+        $lotes = $this->encodeLotes();
 
-		// trailer arquivo
-		$trailerArquivo = $this->encodeTrailerArquivo();
-		
+        // trailer arquivo
+        $trailerArquivo = $this->encodeTrailerArquivo();
+        
 
-		$data = array(
-			$headerArquivo,
-			$lotes,
-			$trailerArquivo,
-		);
+        $data = array(
+        $headerArquivo,
+        $lotes,
+        $trailerArquivo,
+        );
 
-		$data = implode(self::CNAB_EOL, $data);
-		$data .= self::CNAB_EOL;
+        $data = implode(self::CNAB_EOL, $data);
+        $data .= self::CNAB_EOL;
 
-		file_put_contents($path, $data);
-	}
+        return $data;
+    }
 
-	protected function encodeHeaderArquivo()
-	{
-		if (!isset($this->model->header))
-			return;
+    public function generateFile($path)
+    {
+        file_put_contents($path, $this->generateString());
+    }
 
-		$layout = $this->model->getLayout();
-		$layoutRemessa = $layout->getRemessaLayout();
-		return $this->encode($layoutRemessa['header_arquivo'], $this->model->header);
-	}
+    protected function encodeHeaderArquivo()
+    {
+        if (!isset($this->model->header)) {
+            return;
+        }
 
-	protected function encodeLotes()
-	{
-		$encoded = array();
+        $layout = $this->model->getLayout();
+        $layoutRemessa = $layout->getRemessaLayout();
+        return $this->encode($layoutRemessa['header_arquivo'], $this->model->header);
+    }
 
-		foreach ($this->model->lotes as $lote) {
-			// header lote
-			if (!empty($lote->header))
-				$encoded[] = $this->encodeHeaderLote($lote);
+    protected function encodeLotes()
+    {
+        $encoded = array();
 
-			// detalhes
-			$encoded[] = $this->encodeDetalhes($lote);
+        foreach ($this->model->lotes as $lote) {
+            // header lote
+            if (!empty($lote->header)) {
+                $encoded[] = $this->encodeHeaderLote($lote);
+            }
 
-			// trailer lote
-			if (!empty($lote->trailer))
-				$encoded[] = $this->encodeTrailerLote($lote);
-		}
-		
-		return implode(self::CNAB_EOL, $encoded);
-	}
+            // detalhes
+            $encoded[] = $this->encodeDetalhes($lote);
 
-	protected function encodeHeaderLote(Lote $model)
-	{
-		if (!isset($model->header) || empty($model->header))
-			return;
+            // trailer lote
+            if (!empty($lote->trailer)) {
+                $encoded[] = $this->encodeTrailerLote($lote);
+            }
+        }
+        
+        return implode(self::CNAB_EOL, $encoded);
+    }
 
-		$layout = $model->getLayout();
-		return $this->encode($layout['header_lote'], $model->header);
-	}
+    protected function encodeHeaderLote(Lote $model)
+    {
+        if (!isset($model->header) || empty($model->header)) {
+            return;
+        }
 
-	protected function encodeDetalhes(Lote $model)
-	{
-		if (!isset($model->detalhes))
-			return;
+        $layout = $model->getLayout();
+        return $this->encode($layout['header_lote'], $model->header);
+    }
 
-		$layout = $model->getLayout();
+    protected function encodeDetalhes(Lote $model)
+    {
+        if (!isset($model->detalhes)) {
+            return;
+        }
 
-		$encoded = array();
+        $layout = $model->getLayout();
 
-		foreach ($model->detalhes as $detalhe) {
-			foreach ($detalhe as $segmento => $obj) {
-				$segmentoEncoded = $this->encode($layout['detalhes'][$segmento], $detalhe->$segmento);
-				$encoded[] = $segmentoEncoded;
-			}
-		}
+        $encoded = array();
 
-		return implode(self::CNAB_EOL, $encoded);
-	}
+        foreach ($model->detalhes as $detalhe) {
+            foreach ($detalhe as $segmento => $obj) {
+                $segmentoEncoded = $this->encode($layout['detalhes'][$segmento], $detalhe->$segmento);
+                $encoded[] = $segmentoEncoded;
+            }
+        }
 
-	protected function encodeTrailerLote(Lote $model)
-	{
-		if (!isset($model->trailer) || empty($model->trailer))
-			return;
+        return implode(self::CNAB_EOL, $encoded);
+    }
 
-		$layout = $model->getLayout();
-		return $this->encode($layout['trailer_lote'], $model->trailer);
-	}
+    protected function encodeTrailerLote(Lote $model)
+    {
+        if (!isset($model->trailer) || empty($model->trailer)) {
+            return;
+        }
 
-	protected function encodeTrailerArquivo()
-	{
-		if (!isset($this->model->trailer))
-			return;
+        $layout = $model->getLayout();
+        return $this->encode($layout['trailer_lote'], $model->trailer);
+    }
 
-		$layout = $this->model->getLayout();
-		$layoutRemessa = $layout->getRemessaLayout();
-		return $this->encode($layoutRemessa['trailer_arquivo'], $this->model->trailer);
-	}
+    protected function encodeTrailerArquivo()
+    {
+        if (!isset($this->model->trailer)) {
+            return;
+        }
+
+        $layout = $this->model->getLayout();
+        $layoutRemessa = $layout->getRemessaLayout();
+        return $this->encode($layoutRemessa['trailer_arquivo'], $this->model->trailer);
+    }
 }

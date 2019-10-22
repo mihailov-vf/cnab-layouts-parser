@@ -25,16 +25,26 @@ use CnabParser\IntercambioBancarioAbstract;
 
 abstract class IntercambioBancarioFileAbstract
 {
-	/**
-	 * Model to write
-	 * @var CnabParser\Model\IntercambioBancarioAbstract
-	 */
-	protected $model;
+    /**
+     * Model to write
+     *
+     * @var CnabParser\Model\IntercambioBancarioAbstract
+     */
+    protected $model;
 
-	/**
-	 * Write to file $path
-	 * @param  string $path
-	 * @return boolean
-	 */
-	abstract public function generate($path);
+    /**
+     * Write to file $path
+     *
+     * @param string $path Result file path
+     * 
+     * @return boolean
+     */
+    abstract public function generateFile($path);
+
+    /**
+     * Generate Remessa File content
+     *
+     * @return string
+     */
+    abstract public function generateString();
 }
