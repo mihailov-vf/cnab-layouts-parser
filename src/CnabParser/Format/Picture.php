@@ -20,7 +20,7 @@
 // DEALINGS IN THE SOFTWARE.
 
 // Author: Anderson Danilo <contato@andersondanilo.com>
-// 
+//
 namespace CnabParser\Format;
 
 class Picture
@@ -62,6 +62,7 @@ class Picture
         $m = array();
         if (\preg_match(self::REGEX_VALID_FORMAT, $format, $m)) {
             if ($m['tipo1'] == 'X' && !$m['tipo2']) {
+                $value = iconv('UTF-8', 'ASCII//TRANSLIT', $value);
                 $value = \substr($value, 0, $m['tamanho1']);
 
                 return \str_pad($value, (int) $m['tamanho1'], ' ', STR_PAD_RIGHT);
