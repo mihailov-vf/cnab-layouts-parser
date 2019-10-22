@@ -26,27 +26,27 @@ use CnabParser\Parser\Layout;
 
 class Remessa extends IntercambioBancarioAbstract
 {
-	public function __construct(Layout $layout)
-	{
-		parent::__construct($layout);
+    public function __construct(Layout $layout)
+    {
+        parent::__construct($layout);
 
-		$remessaLayout = $this->layout->getRemessaLayout();
-		
-		if (isset($remessaLayout['header_arquivo'])) {
-			foreach ($remessaLayout['header_arquivo'] as $field => $definition) {
-				$this->header->$field = (isset($definition['default'])) ? $definition['default'] : '';
-			}
-		}
+        $remessaLayout = $this->layout->getRemessaLayout();
+        
+        if (isset($remessaLayout['header_arquivo'])) {
+            foreach ($remessaLayout['header_arquivo'] as $field => $definition) {
+                $this->header->$field = (isset($definition['default'])) ? $definition['default'] : '';
+            }
+        }
 
-		if (isset($remessaLayout['trailer_arquivo'])) {
-			foreach ($remessaLayout['trailer_arquivo'] as $field => $definition) {
-				$this->trailer->$field = (isset($definition['default'])) ? $definition['default'] : '';
-			}
-		}
-	}
+        if (isset($remessaLayout['trailer_arquivo'])) {
+            foreach ($remessaLayout['trailer_arquivo'] as $field => $definition) {
+                $this->trailer->$field = (isset($definition['default'])) ? $definition['default'] : '';
+            }
+        }
+    }
 
-	public function novoLote($sequencial = 1)
-	{
-		return new Lote($this->layout->getRemessaLayout(), $sequencial);
-	}
+    public function novoLote($sequencial = 1)
+    {
+        return new Lote($this->layout->getRemessaLayout(), $sequencial);
+    }
 }

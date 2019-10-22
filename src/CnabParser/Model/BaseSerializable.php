@@ -25,6 +25,7 @@ abstract class BaseSerializable implements \JsonSerializable
 {
     /**
      * the data
+     *
      * @var array
      */
     protected $data;

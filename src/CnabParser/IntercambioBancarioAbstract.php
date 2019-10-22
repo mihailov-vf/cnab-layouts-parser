@@ -30,25 +30,28 @@ abstract class IntercambioBancarioAbstract implements \JsonSerializable
 {
     /**
      * Header Arquivo
+     *
      * @var CnabParser\Model\HeaderArquivo
      */
     public $header;
     /**
      * Trailer Arquivo
+     *
      * @var CnabParser\Model\TrailerArquivo
      */
     public $trailer;
 
     /**
      * Array de lotes
+     *
      * @var Array of CnabParser\Model\Lote
      */
     public $lotes;
 
-	/**
-	 * @var CnabParser\Parser\Layout
-	 */
-	protected $layout;
+    /**
+     * @var CnabParser\Parser\Layout
+     */
+    protected $layout;
 
     public function __construct(Layout $layout)
     {
@@ -58,13 +61,13 @@ abstract class IntercambioBancarioAbstract implements \JsonSerializable
         $this->lotes = array();
     }
 
-	/**
-	 * @return CnabParser\Parser\Layout
-	 */
-	public function getLayout()
-	{
-		return $this->layout;
-	}
+    /**
+     * @return CnabParser\Parser\Layout
+     */
+    public function getLayout()
+    {
+        return $this->layout;
+    }
 
     public function inserirLote(Lote $lote)
     {

@@ -26,75 +26,75 @@ use CnabParser\Model\Linha;
 
 class Retorno
 {
-	/**
-	 * @var DataContainer
-	 */
-	public $header_arquivo;
+    /**
+     * @var DataContainer
+     */
+    public $header_arquivo;
 
-	/**
-	 * @var DataContainer
-	 */
-	public $trailer_arquivo;
+    /**
+     * @var DataContainer
+     */
+    public $trailer_arquivo;
 
-	/**
-	 * @var Array of DataContainer (header_lote(1),detalhes(1)(n),trailer_lote(1) ... header_lote(m),detalhes(1)(n),trailer_lote(m))
-	 */
-	public $lotes;
+    /**
+     * @var Array of DataContainer (header_lote(1),detalhes(1)(n),trailer_lote(1) ... header_lote(m),detalhes(1)(n),trailer_lote(m))
+     */
+    public $lotes;
 
-	public function __construct()
-	{
-		$this->header_arquivo = new DataContainer();
-		$this->trailer_arquivo = new DataContainer();
-		$this->lotes = array();
-	}
+    public function __construct()
+    {
+        $this->header_arquivo = new DataContainer();
+        $this->trailer_arquivo = new DataContainer();
+        $this->lotes = array();
+    }
 
-	public function decodeHeaderLote(Linha $linha)
-	{
-		$dados = array();
-		
-		$layout = $linha->getTipo() === 'remessa'
-			? $linha->getLayout()->getRemessaLayout()
-			: $linha->getLayout()->getRetornoLayout();
-		
-		$campos = $layout['header_lote'];
-		
-		foreach ($campos as $nome => $definicao) {
-			$dados[$nome] = $linha->obterValorCampo($definicao);
-		}
+    public function decodeHeaderLote(Linha $linha)
+    {
+        $dados = array();
+        
+        $layout = $linha->getTipo() === 'remessa'
+        ? $linha->getLayout()->getRemessaLayout()
+        : $linha->getLayout()->getRetornoLayout();
+        
+        $campos = $layout['header_lote'];
+        
+        foreach ($campos as $nome => $definicao) {
+            $dados[$nome] = $linha->obterValorCampo($definicao);
+        }
 
-		return $dados;
-	}
+        return $dados;
+    }
 
-	public function decodeTrailerLote(Linha $linha)
-	{
-		$dados = array();
-		
-		$layout = $linha->getTipo() === 'remessa'
-			? $linha->getLayout()->getRemessaLayout()
-			: $linha->getLayout()->getRetornoLayout();
-		
-		$campos = $layout['trailer_lote'];
-		
-		foreach ($campos as $nome => $definicao) {
-			$dados[$nome] = $linha->obterValorCampo($definicao);
-		}
+    public function decodeTrailerLote(Linha $linha)
+    {
+        $dados = array();
+        
+        $layout = $linha->getTipo() === 'remessa'
+        ? $linha->getLayout()->getRemessaLayout()
+        : $linha->getLayout()->getRetornoLayout();
+        
+        $campos = $layout['trailer_lote'];
+        
+        foreach ($campos as $nome => $definicao) {
+            $dados[$nome] = $linha->obterValorCampo($definicao);
+        }
 
-		return $dados;
-	}
+        return $dados;
+    }
 
-	public function getTotalLotes()
-	{
-		return count($this->lotes);
-	}
+    public function getTotalLotes()
+    {
+        return count($this->lotes);
+    }
 
-	public function getTotalTitulos()
-	{
-		$total = 0;
-		
-		foreach ($this->lotes as $lote) {
-			$total += count($lote['titulos']);
-		}
+    public function getTotalTitulos()
+    {
+        $total = 0;
+        
+        foreach ($this->lotes as $lote) {
+            $total += count($lote['titulos']);
+        }
 
-		return $total;
-	}
+        return $total;
+    }
 }

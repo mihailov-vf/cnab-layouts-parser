@@ -23,89 +23,89 @@ namespace CnabParser\Model;
 
 class Lote implements \JsonSerializable
 {
-	public $sequencial;
-	public $header;
-	public $trailer;
-	public $detalhes;
+    public $sequencial;
+    public $header;
+    public $trailer;
+    public $detalhes;
 
-	protected $layout;
+    protected $layout;
 
-	public function __construct(array $layout, $sequencial = 1)
-	{
-		$this->layout = $layout;
-
-		$this->sequencial = $sequencial;
-		// inicia com header e trailer = null pois cnab400 pode não conter header e trailer de lotes (CEF SIGCB CNAB400 por exemplo)
-		$this->header = null;
-		$this->trailer = null;
-		$this->detalhes = array();
-
-		if (isset($this->layout['header_lote'])) {
-			$this->header = new HeaderLote();
-			foreach ($this->layout['header_lote'] as $field => $definition) {
-				$this->header->$field = (isset($definition['default'])) ? $definition['default'] : '';
-			}
-		}
-
-		if (isset($this->layout['trailer_lote'])) {
-			$this->trailer = new TrailerLote();
-			foreach ($this->layout['trailer_lote'] as $field => $definition) {
-				$this->trailer->$field = (isset($definition['default'])) ? $definition['default'] : '';
-			}
-		}
-	}
-
-	public function getLayout()
-	{
-		return $this->layout;
-	}
-
-	public function novoDetalhe(array $excetoSegmentos = array())
-	{
-		$detalhe = new \stdClass;
-		if (isset($this->layout['detalhes'])) {
-			foreach ($this->layout['detalhes'] as $segmento => $segmentoDefinitions) {
-				// pula segmentos informados como "exceto" no parametro da função
-				if (in_array($segmento, $excetoSegmentos)) {
-					continue;
-				}
-				$detalhe->$segmento = new \stdClass;
-				foreach ($segmentoDefinitions as $field => $definition) {
-					$detalhe->$segmento->$field = (isset($definition['default'])) ? $definition['default'] : '';
-				}
-			}
-		}
-		return $detalhe;
-	}
-
-	public function inserirDetalhe(\stdClass $detalhe)
-	{
-		$this->detalhes[] = $detalhe;
-		return $this;
-	}
-
-	public function countDetalhes()
-	{
-		return count($this->detalhes);
-	}
-
-	public function limpaDetalhes()
-	{
-		$this->detalhes = array();
-		return $this;
-	}
-
-	public function jsonSerialize()
+    public function __construct(array $layout, $sequencial = 1)
     {
-    	$headerLote = $this->header->jsonSerialize();
-    	$trailerLote = $this->trailer->jsonSerialize();
-    	$detalhes = $this->detalhes;
+        $this->layout = $layout;
 
-    	return array_merge(
-    		array('codigo_lote' => $this->sequencial),
-    		array('header_lote' => $headerLote),
-    		array('detalhes' => $detalhes),
-    		array('trailer_lote' => $trailerLote)
-		);
+        $this->sequencial = $sequencial;
+        // inicia com header e trailer = null pois cnab400 pode não conter header e trailer de lotes (CEF SIGCB CNAB400 por exemplo)
+        $this->header = null;
+        $this->trailer = null;
+        $this->detalhes = array();
+
+        if (isset($this->layout['header_lote'])) {
+            $this->header = new HeaderLote();
+            foreach ($this->layout['header_lote'] as $field => $definition) {
+                $this->header->$field = (isset($definition['default'])) ? $definition['default'] : '';
+            }
+        }
+
+        if (isset($this->layout['trailer_lote'])) {
+            $this->trailer = new TrailerLote();
+            foreach ($this->layout['trailer_lote'] as $field => $definition) {
+                $this->trailer->$field = (isset($definition['default'])) ? $definition['default'] : '';
+            }
+        }
+    }
+
+    public function getLayout()
+    {
+        return $this->layout;
+    }
+
+    public function novoDetalhe(array $excetoSegmentos = array())
+    {
+        $detalhe = new \stdClass;
+        if (isset($this->layout['detalhes'])) {
+            foreach ($this->layout['detalhes'] as $segmento => $segmentoDefinitions) {
+                // pula segmentos informados como "exceto" no parametro da função
+                if (in_array($segmento, $excetoSegmentos)) {
+                    continue;
+                }
+                $detalhe->$segmento = new \stdClass;
+                foreach ($segmentoDefinitions as $field => $definition) {
+                    $detalhe->$segmento->$field = (isset($definition['default'])) ? $definition['default'] : '';
+                }
+            }
+        }
+        return $detalhe;
+    }
+
+    public function inserirDetalhe(\stdClass $detalhe)
+    {
+        $this->detalhes[] = $detalhe;
+        return $this;
+    }
+
+    public function countDetalhes()
+    {
+        return count($this->detalhes);
+    }
+
+    public function limpaDetalhes()
+    {
+        $this->detalhes = array();
+        return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        $headerLote = $this->header->jsonSerialize();
+        $trailerLote = $this->trailer->jsonSerialize();
+        $detalhes = $this->detalhes;
+
+        return array_merge(
+            array('codigo_lote' => $this->sequencial),
+            array('header_lote' => $headerLote),
+            array('detalhes' => $detalhes),
+            array('trailer_lote' => $trailerLote)
+        );
     }
 }
